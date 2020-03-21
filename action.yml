@@ -1,0 +1,24 @@
+# action.yml
+name: "minio-mirror"
+description: "Upload files to a Minio bucket using the `mc mirror` command"
+inputs:
+  host:
+    description: "https://<Access Key>:<Secret Key>@<YOUR-MINO-SERVER>"
+    required: true
+  bucket:
+    description: "Minio bucket name"
+    required: true
+  src:
+    description: "Path in github workspace (may be relative)"
+    required: true
+  dst:
+    description: "Key within the Minio bucket"
+    required: true
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  env:
+    GH_ACTION_MINIO_MIRROR__HOST: ${{inputs.host}}
+    GH_ACTION_MINIO_MIRROR__BUCKET: ${{inputs.bucket}}
+    GH_ACTION_MINIO_MIRROR__SRC: ${{inputs.src}}
+    GH_ACTION_MINIO_MIRROR__DST: ${{inputs.dst}}

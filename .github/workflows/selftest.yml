@@ -1,0 +1,25 @@
+on: [push]
+
+jobs:
+  testupload:
+    runs-on: ubuntu-latest
+    name: do a test upload
+    steps:
+      # To use this repository's private action, you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Create some fake artifacts
+        run: |
+          mkdir artifacts
+          for i in $(seq 0 10); do
+            echo "$i" > artifacts/artifact$i.txt
+          done
+
+      - name: Upload using this action
+        uses: ./ # uses the action we checked out in the first step
+        with:
+          host: ${{ secrets.ARTIFACT_UPLOAD_HOST }}
+          bucket: ${{ secrets.ARTIFACT_UPLOAD_BUCKET }}
+          src: ./artifacts
+          dst: ${{ github.sha }}/run-${{github.run_number}}
