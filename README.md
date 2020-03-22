@@ -49,6 +49,8 @@ MC_HOST_myalias=https://projectname-ci-artifact-uploader:<SOMERANDOMPASSWORD>@<c
       bucket: ${{ secrets.ARTIFACT_UPLOAD_BUCKET }}
       src: ./artifacts
       dst: ${{ github.sha }}
+      # optional: args that are passed-through to the mc command
+      # args: --overwrite --delete
 ```
 
 ### Step 3: Add the secrets to your GitHub repo config

@@ -39,5 +39,6 @@ if [ ! -e "$GH_ACTION_MINIO_MIRROR__SRC" ]; then
 fi
 SRC="$GH_ACTION_MINIO_MIRROR__SRC"
 
-mc mirror "$SRC" "$DST"
+args=("$@")
+mc mirror "${args[@]}" "$SRC" "$DST"
 echo success

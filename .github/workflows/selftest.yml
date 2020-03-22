@@ -23,3 +23,5 @@ jobs:
           bucket: ${{ secrets.ARTIFACT_UPLOAD_BUCKET }}
           src: ./artifacts
           dst: ${{ github.sha }}/run-${{github.run_number}}
+          # optional: specify `mc mirror` args
+          args: --overwite --delete
